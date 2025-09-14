@@ -5,7 +5,6 @@ A mobile-first React web application for crowdsourced ocean hazard monitoring an
 ## Features
 
 ### 🏠 Home / Dashboard
-- Twitter-style feed of hazard posts with card layout
 - Real-time alert banners for emergency notifications
 - Swipeable safety tips carousel (Instagram stories style)
 - Filter bar for different hazard types (All, Floods, High Waves, Cyclones, Tsunami)
