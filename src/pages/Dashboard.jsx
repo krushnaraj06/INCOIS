@@ -565,6 +565,9 @@ const Dashboard = () => {
                     </div>
                 </div>
 
+                 {/* Quick Report */}
+                <QuickReport />
+
                 {/* Location Check */}
                 <div className="card p-4">
                     <h3 className="font-semibold text-gray-900 mb-3 flex items-center space-x-2">
@@ -693,6 +696,8 @@ const Dashboard = () => {
                     )}
                 </div>
 
+                
+
                 {/* Emergency Guidelines */}
                 <div className="card p-4">
                     <h3 className="font-semibold text-gray-900 mb-3">Emergency Guidelines</h3>
@@ -738,8 +743,7 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                {/* Quick Report */}
-                <QuickReport />
+               
             </div>
         </div>
     );
