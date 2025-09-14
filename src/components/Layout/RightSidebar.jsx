@@ -1,9 +1,11 @@
 import React from 'react';
 import { AlertTriangle, TrendingUp, Users, MapPin } from 'lucide-react';
-import { mockAlerts, mockTips, mockPosts } from '../../data/mockData';
+import { mockAlerts, mockTips } from '../../data/mockData';
+import { useApp } from '../../contexts/AppContext';
 
 const RightSidebar = () => {
-  const recentReports = mockPosts.slice(0, 3);
+  const { posts } = useApp();
+  const recentReports = posts.slice(0, 3);
   const activeAlert = mockAlerts.find(alert => alert.active);
 
   return (
@@ -81,12 +83,12 @@ const RightSidebar = () => {
           <div className="space-y-3">
             <div className="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
               <span className="text-sm font-medium text-gray-700">Total Reports</span>
-              <span className="font-bold text-gray-900">{mockPosts.length}</span>
+              <span className="font-bold text-gray-900">{posts.length}</span>
             </div>
             <div className="flex justify-between items-center p-3 bg-red-50 rounded-lg">
               <span className="text-sm font-medium text-gray-700">High Severity</span>
               <span className="font-bold text-red-600">
-                {mockPosts.filter(p => p.severity === 'high').length}
+                {posts.filter(p => p.severity === 'high').length}
               </span>
             </div>
             <div className="flex justify-between items-center p-3 bg-emerald-50 rounded-lg">

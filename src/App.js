@@ -6,6 +6,7 @@ import Sidebar from './components/Layout/Sidebar';
 import RightSidebar from './components/Layout/RightSidebar';
 import BottomNavigation from './components/Layout/BottomNavigation';
 import FloatingActionButton from './components/Layout/FloatingActionButton';
+import Dashboard from './pages/Dashboard';
 import Home from './pages/Home';
 import Map from './pages/Map';
 import Report from './pages/Report';
@@ -20,7 +21,8 @@ function App() {
             <Sidebar />
             <RightSidebar />
             <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/feed" element={<Home />} />
               <Route path="/map" element={<Map />} />
               <Route path="/report" element={<Report />} />
               <Route path="/profile" element={<Profile />} />

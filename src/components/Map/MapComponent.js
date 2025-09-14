@@ -1,7 +1,8 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import { mockPosts, severityLevels } from '../../data/mockData';
+import { severityLevels } from '../../data/mockData';
+import { useApp } from '../../contexts/AppContext';
 
 // Fix for default markers in react-leaflet
 delete L.Icon.Default.prototype._getIconUrl;
@@ -35,6 +36,8 @@ const createCustomIcon = (severity) => {
 };
 
 const MapComponent = () => {
+  const { posts } = useApp();
+  
   // Center map on India's coastline
   const center = [15.2993, 74.1240];
   const zoom = 6;
@@ -52,7 +55,7 @@ const MapComponent = () => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         
-        {mockPosts.map((post) => (
+        {posts.map((post) => (
           <Marker
             key={post.id}
             position={post.location.coordinates}

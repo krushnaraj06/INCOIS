@@ -10,25 +10,14 @@ import { useApp } from '../contexts/AppContext';
 const Home = () => {
   const { getFilteredPosts } = useApp();
   const [isRefreshing, setIsRefreshing] = useState(false);
-  const [displayedPosts, setDisplayedPosts] = useState([]);
-  const [page, setPage] = useState(1);
-  const postsPerPage = 5;
 
   const filteredPosts = getFilteredPosts();
-
-  useEffect(() => {
-    // Reset pagination when filter changes
-    setPage(1);
-    setDisplayedPosts(filteredPosts.slice(0, postsPerPage));
-  }, [filteredPosts]);
 
   const handleRefresh = async () => {
     setIsRefreshing(true);
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1000));
     setIsRefreshing(false);
-    setPage(1);
-    setDisplayedPosts(filteredPosts.slice(0, postsPerPage));
   };
 
   // Calculate dynamic alert based on severity
@@ -52,24 +41,7 @@ const Home = () => {
 
   const dynamicAlert = getHighestSeverityAlert();
 
-  const loadMorePosts = () => {
-    const nextPage = page + 1;
-    const startIndex = (nextPage - 1) * postsPerPage;
-    const endIndex = startIndex + postsPerPage;
-    const newPosts = filteredPosts.slice(startIndex, endIndex);
-    
-    if (newPosts.length > 0) {
-      setDisplayedPosts(prev => [...prev, ...newPosts]);
-      setPage(nextPage);
-    }
-  };
 
-  const handleScroll = (e) => {
-    const { scrollTop, scrollHeight, clientHeight } = e.target;
-    if (scrollHeight - scrollTop === clientHeight) {
-      loadMorePosts();
-    }
-  };
 
   return (
     <div className="min-h-screen bg-gray-50 md:pb-0 pb-20">
@@ -110,24 +82,13 @@ const Home = () => {
           <FilterBar />
           
           <div className="space-y-6">
-            {displayedPosts.map((post) => (
+            {filteredPosts.map((post) => (
               <PostCard key={post.id} post={post} />
             ))}
             
-            {displayedPosts.length === 0 && (
+            {filteredPosts.length === 0 && (
               <div className="text-center py-12">
                 <p className="text-gray-500 text-lg">No posts found for the selected filter.</p>
-              </div>
-            )}
-            
-            {displayedPosts.length < filteredPosts.length && (
-              <div className="text-center py-6">
-                <button
-                  onClick={loadMorePosts}
-                  className="btn-secondary px-8 py-3"
-                >
-                  Load More Posts
-                </button>
               </div>
             )}
           </div>
@@ -138,7 +99,6 @@ const Home = () => {
       <div 
         className="md:hidden max-w-md mx-auto px-4 py-4 overflow-y-auto"
         style={{ height: 'calc(100vh - 140px)' }}
-        onScroll={handleScroll}
       >
         {/* Pull to refresh indicator */}
         <div className="flex justify-center mb-4">
@@ -161,24 +121,13 @@ const Home = () => {
         <FilterBar />
         
         <div className="space-y-4">
-          {displayedPosts.map((post) => (
+          {filteredPosts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
           
-          {displayedPosts.length === 0 && (
+          {filteredPosts.length === 0 && (
             <div className="text-center py-8">
               <p className="text-gray-500">No posts found for the selected filter.</p>
-            </div>
-          )}
-          
-          {displayedPosts.length < filteredPosts.length && (
-            <div className="text-center py-4">
-              <button
-                onClick={loadMorePosts}
-                className="btn-secondary"
-              >
-                Load More Posts
-              </button>
             </div>
           )}
         </div>

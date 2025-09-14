@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { ChevronUp, ChevronDown, MapPin, Clock } from 'lucide-react';
-import { mockPosts, severityLevels } from '../../data/mockData';
+import { severityLevels } from '../../data/mockData';
+import { useApp } from '../../contexts/AppContext';
 
 const BottomSheet = () => {
+  const { posts } = useApp();
   const [isExpanded, setIsExpanded] = useState(false);
-  const recentReports = mockPosts.slice(0, 5);
+  const recentReports = posts.slice(0, 5);
 
   const formatTime = (timestamp) => {
     const date = new Date(timestamp);

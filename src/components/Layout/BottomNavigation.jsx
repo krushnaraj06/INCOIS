@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, Map, Plus, User } from 'lucide-react';
+import { Home, Map, Plus, User, BarChart3 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const BottomNavigation = () => {
@@ -9,9 +9,10 @@ const BottomNavigation = () => {
   const { t } = useLanguage();
 
   const navItems = [
-    { path: '/', icon: Home, label: t('home') },
-    { path: '/map', icon: Map, label: t('map') },
+    { path: '/', icon: BarChart3, label: 'Dashboard' },
+    { path: '/feed', icon: Home, label: 'Feed' },
     { path: '/report', icon: Plus, label: t('report') },
+    { path: '/map', icon: Map, label: t('map') },
     { path: '/profile', icon: User, label: t('profile') }
   ];
 

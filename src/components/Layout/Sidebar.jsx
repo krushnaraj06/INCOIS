@@ -1,6 +1,6 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Home, Map, Plus, User, Globe } from 'lucide-react';
+import { Home, Map, Plus, User, Globe, BarChart3 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
 const Sidebar = () => {
@@ -9,7 +9,8 @@ const Sidebar = () => {
   const { t, currentLanguage, switchLanguage } = useLanguage();
 
   const navItems = [
-    { path: '/', icon: Home, label: t('home') },
+    { path: '/', icon: BarChart3, label: 'Dashboard' },
+    { path: '/feed', icon: Home, label: 'Feed' },
     { path: '/map', icon: Map, label: t('map') },
     { path: '/report', icon: Plus, label: t('report') },
     { path: '/profile', icon: User, label: t('profile') }
