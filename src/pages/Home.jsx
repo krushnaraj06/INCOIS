@@ -45,7 +45,7 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 md:pb-0 pb-20">
-      <Header title="Ocean Hazard Feed" />
+      <Header title="CoastalMitra Feed" />
       
       {/* Desktop Layout */}
       <div className="hidden md:flex md:ml-64 lg:mr-80">

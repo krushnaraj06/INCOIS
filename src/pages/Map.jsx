@@ -10,7 +10,7 @@ const Map = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 md:pb-0 pb-20">
-      <Header title="Hazard Map" />
+      <Header title="CoastalMitra Map" />
       
       {/* Desktop Layout */}
       <div className="hidden md:flex md:ml-64 lg:mr-80">

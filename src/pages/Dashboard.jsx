@@ -213,7 +213,7 @@ const Dashboard = () => {
 
     return (
         <div className="min-h-screen bg-gray-50 md:pb-0 pb-20">
-            <Header title="Ocean Guard Dashboard" />
+            <Header title=" CoastalMitra Dashboard" />
 
             {/* Desktop Layout */}
             <div className="hidden md:flex md:ml-64 lg:mr-80">

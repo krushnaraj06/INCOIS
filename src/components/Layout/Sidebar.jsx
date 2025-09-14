@@ -3,6 +3,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Home, Map, Plus, User, Globe, BarChart3 } from 'lucide-react';
 import { useLanguage } from '../../contexts/LanguageContext';
 
+// Import your logo
+import logo from '../../assets/CoastMitraLogo.png'; // adjust path as per your project structure
+
 const Sidebar = () => {
   const location = useLocation();
   const navigate = useNavigate();
@@ -19,13 +22,17 @@ const Sidebar = () => {
   return (
     <div className="hidden md:flex md:flex-col md:fixed md:left-0 md:top-0 md:h-full md:w-64 sidebar-clean md:z-40 md:shadow-sm">
       {/* Logo/Header */}
-      <div className="p-6 border-b border-gray-100">
+      <div className="p-6">
         <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white font-bold text-lg">🌊</span>
+            <img 
+              src={logo}
+              alt="Logo"
+              className="w-20 h-20 object-contain"
+            />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-gray-900">Ocean Guard</h1>
+            <h1 className="text-xl font-bold text-gray-900">CoastalMitra</h1>
             <p className="text-sm text-gray-500">Coastal Safety Network</p>
           </div>
         </div>
