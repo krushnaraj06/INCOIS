@@ -173,21 +173,7 @@ const Profile = () => {
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-4">
-          <div className="card p-4 text-center">
-            <div className="text-2xl font-bold text-primary-600">{mockUser.stats.reports}</div>
-            <div className="text-sm text-gray-600">{t('myReports')}</div>
-          </div>
-          <div className="card p-4 text-center">
-            <div className="text-2xl font-bold text-primary-600">{mockUser.stats.likes}</div>
-            <div className="text-sm text-gray-600">Likes</div>
-          </div>
-          <div className="card p-4 text-center">
-            <div className="text-2xl font-bold text-primary-600">{mockUser.stats.comments}</div>
-            <div className="text-sm text-gray-600">Comments</div>
-          </div>
-        </div>
+        
 
         {/* Badges */}
         <div className="card p-4">

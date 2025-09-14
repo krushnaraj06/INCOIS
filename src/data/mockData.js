@@ -110,6 +110,160 @@ export const mockPosts = [
     comments: 5,
     shares: 3,
     verified: false
+  },
+  {
+    id: 6,
+    user: {
+      id: 6,
+      name: "Venkat Rao",
+      handle: "@venkat_vizag",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "URGENT: Cyclone Michaung approaching Visakhapatnam! Winds already at 80 kmph. All fishing boats returned to harbor. Residents in low-lying areas being evacuated.",
+    image: "https://images.unsplash.com/photo-1527482797697-8795b05a13fe?w=600&h=400&fit=crop",
+    hazardType: "Cyclone",
+    severity: "high",
+    location: {
+      name: "Visakhapatnam Port, Andhra Pradesh",
+      coordinates: [17.6868, 83.2185]
+    },
+    timestamp: "2024-01-15T11:45:00Z",
+    likes: 89,
+    comments: 34,
+    shares: 28,
+    verified: true
+  },
+  {
+    id: 7,
+    user: {
+      id: 7,
+      name: "Lakshmi Devi",
+      handle: "@lakshmi_vizag",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "Heavy flooding near RK Beach area in Visakhapatnam. Water entered ground floor shops. Traffic completely blocked on Beach Road. Avoid this route!",
+    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&h=400&fit=crop",
+    hazardType: "Flood",
+    severity: "high",
+    location: {
+      name: "RK Beach, Visakhapatnam",
+      coordinates: [17.7231, 83.3261]
+    },
+    timestamp: "2024-01-15T10:15:00Z",
+    likes: 67,
+    comments: 22,
+    shares: 19,
+    verified: false
+  },
+  {
+    id: 8,
+    user: {
+      id: 8,
+      name: "Captain Murthy",
+      handle: "@captain_vizag",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "Visakhapatnam Port Authority has suspended all operations. Wave height recorded at 6.2 meters - highest this season. All vessels advised to stay in safe harbor.",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop",
+    hazardType: "High Waves",
+    severity: "high",
+    location: {
+      name: "Visakhapatnam Port, Andhra Pradesh",
+      coordinates: [17.6868, 83.2185]
+    },
+    timestamp: "2024-01-15T09:30:00Z",
+    likes: 112,
+    comments: 45,
+    shares: 33,
+    verified: true
+  },
+  {
+    id: 9,
+    user: {
+      id: 9,
+      name: "Srinivas Reddy",
+      handle: "@srini_vizag",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "Tsunami warning sirens tested in Visakhapatnam coastal areas. This is just a drill, but good to see emergency systems working. Stay prepared everyone!",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=600&h=400&fit=crop",
+    hazardType: "Tsunami",
+    severity: "medium",
+    location: {
+      name: "Visakhapatnam Beach Road",
+      coordinates: [17.7231, 83.3261]
+    },
+    timestamp: "2024-01-15T08:00:00Z",
+    likes: 34,
+    comments: 12,
+    shares: 8,
+    verified: false
+  },
+  {
+    id: 10,
+    user: {
+      id: 10,
+      name: "Anitha Kumari",
+      handle: "@anitha_ap",
+      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "Visakhapatnam Steel Plant area experiencing severe waterlogging. Industrial operations halted as precautionary measure. Workers evacuated safely.",
+    image: "https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=600&h=400&fit=crop",
+    hazardType: "Flood",
+    severity: "medium",
+    location: {
+      name: "Steel Plant, Visakhapatnam",
+      coordinates: [17.6599, 83.2185]
+    },
+    timestamp: "2024-01-15T07:45:00Z",
+    likes: 45,
+    comments: 16,
+    shares: 12,
+    verified: true
+  },
+  {
+    id: 11,
+    user: {
+      id: 11,
+      name: "Fisherman Raju",
+      handle: "@raju_fisherman",
+      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "All fishing boats safely returned to Visakhapatnam fishing harbor. Rough seas with 4-meter waves. No fishing for next 48 hours as per Coast Guard advisory.",
+    image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=400&fit=crop",
+    hazardType: "High Waves",
+    severity: "medium",
+    location: {
+      name: "Fishing Harbor, Visakhapatnam",
+      coordinates: [17.6868, 83.2185]
+    },
+    timestamp: "2024-01-15T06:30:00Z",
+    likes: 28,
+    comments: 8,
+    shares: 5,
+    verified: false
+  },
+  {
+    id: 12,
+    user: {
+      id: 12,
+      name: "Dr. Prasad",
+      handle: "@dr_prasad_vizag",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face"
+    },
+    content: "Visakhapatnam District Collector confirms: 15,000 people evacuated from coastal areas. Relief camps set up at 25 locations. Medical teams on standby.",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop",
+    hazardType: "Cyclone",
+    severity: "high",
+    location: {
+      name: "Visakhapatnam District, Andhra Pradesh",
+      coordinates: [17.6868, 83.2185]
+    },
+    timestamp: "2024-01-15T05:15:00Z",
+    likes: 156,
+    comments: 67,
+    shares: 89,
+    verified: true
   }
 ];
 
@@ -198,7 +352,9 @@ export const severityLevels = {
 // Language translations
 export const translations = {
   en: {
+    dashboard: "Dashboard",
     home: "Home",
+    feed: "Feed",
     map: "Map",
     report: "Report",
     profile: "Profile",
@@ -221,7 +377,9 @@ export const translations = {
     language: "Language"
   },
   hi: {
+    dashboard: "डैशबोर्ड",
     home: "होम",
+    feed: "फीड",
     map: "मैप",
     report: "रिपोर्ट",
     profile: "प्रोफाइल",
