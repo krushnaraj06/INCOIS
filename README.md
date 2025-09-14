@@ -21,10 +21,13 @@ A mobile-first React web application for crowdsourced ocean hazard monitoring an
 ### 📱 Report Upload
 - Multi-step upload flow with progress indicator
 - Camera interface for photo capture (mock file input)
-- Auto-generated location and timestamp (mock data)
+- **Automatic geolocation capture and overlay on images**
+- **AI-powered flood detection using Hugging Face model**
+- Real-time flood risk assessment with confidence scores
+- Auto-generated location and timestamp
 - Hazard type selection dropdown
 - Optional description text box
-- Preview before submission
+- Preview before submission with flood detection results
 - Automatic integration with feed and map
 
 ### 👤 Profile Management
@@ -44,6 +47,8 @@ A mobile-first React web application for crowdsourced ocean hazard monitoring an
 ## Tech Stack
 
 - **Frontend**: React 18
+- **Backend**: Python Flask
+- **AI/ML**: Hugging Face Transformers (SigLIP model)
 - **Styling**: TailwindCSS
 - **Routing**: React Router DOM
 - **Maps**: React Leaflet
@@ -52,23 +57,71 @@ A mobile-first React web application for crowdsourced ocean hazard monitoring an
 
 ## Installation
 
+### Quick Start (Windows)
 1. Clone the repository:
 ```bash
 git clone <repository-url>
 cd ocean-hazard-social-feed
 ```
 
-2. Install dependencies:
+2. Run the startup script:
+```bash
+start_project.bat
+```
+
+This will automatically start both the Python backend and React frontend.
+
+### Manual Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd ocean-hazard-social-feed
+```
+
+2. Install frontend dependencies:
 ```bash
 npm install
 ```
 
-3. Start the development server:
+3. Set up the Python backend:
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
+
+4. In a new terminal, start the React frontend:
 ```bash
 npm start
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+5. Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+### Backend Services
+
+#### Python Backend (Original)
+The Python backend runs on [http://localhost:5000](http://localhost:5000) and provides:
+- Flood detection API using Hugging Face model
+- Image processing with geolocation support
+- RESTful endpoints for frontend integration
+
+#### Java Backend (Alternative)
+The Java Spring Boot backend also runs on [http://localhost:5000](http://localhost:5000) and provides:
+- Flood detection API with intelligent mock implementation
+- Image analysis using brightness and color heuristics
+- RESTful endpoints compatible with the frontend
+- Better performance and enterprise-ready architecture
+
+**To use Java backend:**
+```bash
+# Quick start with Java backend
+start_project_java.bat
+
+# Or manually
+cd backend-java
+mvn spring-boot:run
+```
 
 ## Project Structure
 
