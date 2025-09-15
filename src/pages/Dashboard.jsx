@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { AlertTriangle, MapPin, Clock, Users, Phone, Search, Shield, CheckCircle, Heart, MessageCircle, Share } from 'lucide-react';
+import { AlertTriangle, MapPin, Clock, Users, Phone, Search, Shield, CheckCircle, Heart, MessageCircle } from 'lucide-react';
 import Header from '../components/Layout/Header';
 import QuickReport from '../components/Dashboard/QuickReport';
 import { useLanguage } from '../contexts/LanguageContext';
 import { mockPosts, severityLevels } from '../data/mockData';
 
 const Dashboard = () => {
-    const { t } = useLanguage();
+    const { } = useLanguage();
     const [activeTab, setActiveTab] = useState('general');
     const [searchLocation, setSearchLocation] = useState('');
     const [quickActionToggle, setQuickActionToggle] = useState('family');
@@ -125,75 +125,177 @@ const Dashboard = () => {
         ]
     };
 
-    const handleLocationCheck = () => {
+    const handleLocationCheck = async () => {
         if (searchLocation.trim()) {
             setIsSearching(true);
             
-            // Simulate API call delay
-            setTimeout(() => {
-                // Mock location severity data
-                const mockSeverityData = {
-                    location: searchLocation,
-                    severity: Math.floor(Math.random() * 100),
-                    level: ['Low Alert', 'Medium Alert', 'High Alert', 'Critical'][Math.floor(Math.random() * 4)],
-                    color: ['green', 'yellow', 'orange', 'red'][Math.floor(Math.random() * 4)],
-                    population: '1,234,567',
-                    lastUpdated: '4:15 PM',
-                    coordinates: [13.0827 + (Math.random() - 0.5) * 0.1, 80.2707 + (Math.random() - 0.5) * 0.1]
-                };
+            try {
+                // Simulate API call with more realistic data
+                await new Promise(resolve => setTimeout(resolve, 1200));
+                
+                // Enhanced location matching with your existing alertAreas data
+                const foundArea = alertAreas.find(area => 
+                    area.city.toLowerCase().includes(searchLocation.toLowerCase()) ||
+                    area.state.toLowerCase().includes(searchLocation.toLowerCase())
+                );
+                
+                let mockSeverityData;
+                
+                if (foundArea) {
+                    // Use actual data from alertAreas if found
+                    mockSeverityData = {
+                        location: `${foundArea.city}, ${foundArea.state}`,
+                        severity: foundArea.severity,
+                        level: foundArea.level,
+                        color: foundArea.color,
+                        population: foundArea.population,
+                        lastUpdated: foundArea.updatedTime,
+                        coordinates: [
+                            // Add approximate coordinates for major cities
+                            foundArea.city === 'Visakhapatnam' ? [17.6868, 83.2185] :
+                            foundArea.city === 'Bhubaneswar' ? [20.2961, 85.8245] :
+                            foundArea.city === 'Chennai' ? [13.0827, 80.2707] :
+                            foundArea.city === 'Mumbai' ? [19.0760, 72.8777] :
+                            [20.5937, 78.9629] // Default India center
+                        ]
+                    };
+                } else {
+                    // Generate mock data for locations not in alertAreas
+                    const randomSeverity = Math.floor(Math.random() * 100);
+                    const severityLevel = randomSeverity >= 80 ? 'Critical' :
+                                       randomSeverity >= 65 ? 'High Alert' :
+                                       randomSeverity >= 40 ? 'Medium Alert' : 'Low Alert';
+                    const severityColor = randomSeverity >= 80 ? 'red' :
+                                        randomSeverity >= 65 ? 'orange' :
+                                        randomSeverity >= 40 ? 'yellow' : 'green';
+                    
+                    mockSeverityData = {
+                        location: searchLocation,
+                        severity: randomSeverity,
+                        level: severityLevel,
+                        color: severityColor,
+                        population: `${Math.floor(Math.random() * 5000000 + 100000).toLocaleString()}`,
+                        lastUpdated: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
+                        coordinates: [
+                            20.5937 + (Math.random() - 0.5) * 10, 
+                            78.9629 + (Math.random() - 0.5) * 10
+                        ]
+                    };
+                }
 
-                // Find related posts for this location (mock search)
+                // Find related posts more intelligently
+                const searchTerms = searchLocation.toLowerCase().split(/[\s,]+/);
                 const relatedPosts = mockPosts.filter(post => 
-                    post.location.name.toLowerCase().includes(searchLocation.toLowerCase()) ||
-                    searchLocation.toLowerCase().includes(post.location.name.toLowerCase().split(',')[0].toLowerCase())
+                    searchTerms.some(term => 
+                        post.location.name.toLowerCase().includes(term) ||
+                        post.content.toLowerCase().includes(term) ||
+                        post.hazardType.toLowerCase().includes(term)
+                    )
                 );
 
                 setLocationResults({
                     ...mockSeverityData,
-                    relatedPosts: relatedPosts.length > 0 ? relatedPosts : mockPosts.slice(0, 2) // Show some posts if no exact match
+                    relatedPosts: relatedPosts.length > 0 ? relatedPosts.slice(0, 5) : mockPosts.slice(0, 3)
                 });
+                
+            } catch (error) {
+                console.error('Location search error:', error);
+                alert('Error searching for location. Please try again.');
+            } finally {
                 setIsSearching(false);
-            }, 1000);
+            }
         } else {
             alert('Please enter a location to check');
         }
     };
 
     const handleCurrentLocationCheck = () => {
-        if (navigator.geolocation) {
-            setIsSearching(true);
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
+        if (!navigator.geolocation) {
+            alert('Geolocation is not supported by this browser.');
+            return;
+        }
+
+        setIsSearching(true);
+        
+        navigator.geolocation.getCurrentPosition(
+            async (position) => {
+                try {
                     const { latitude, longitude } = position.coords;
                     
-                    // Mock current location severity data
+                    // Simulate reverse geocoding delay
+                    await new Promise(resolve => setTimeout(resolve, 800));
+                    
+                    // Determine nearest alert area based on coordinates (simplified)
+                    const nearestArea = alertAreas.reduce((nearest, area) => {
+                        // Simple distance calculation (not accurate but for demo)
+                        const areaCoords = {
+                            'Visakhapatnam': [17.6868, 83.2185],
+                            'Bhubaneswar': [20.2961, 85.8245],
+                            'Chennai': [13.0827, 80.2707],
+                            'Mumbai': [19.0760, 72.8777]
+                        }[area.city] || [20.5937, 78.9629];
+                        
+                        const distance = Math.sqrt(
+                            Math.pow(latitude - areaCoords[0], 2) + 
+                            Math.pow(longitude - areaCoords[1], 2)
+                        );
+                        
+                        return !nearest || distance < nearest.distance 
+                            ? { ...area, distance } 
+                            : nearest;
+                    }, null);
+
                     const mockCurrentLocationData = {
-                        location: `Current Location (${latitude.toFixed(4)}, ${longitude.toFixed(4)})`,
-                        severity: 35,
-                        level: 'Low Alert',
-                        color: 'green',
+                        location: `Current Location (Near ${nearestArea?.city || 'Unknown Area'})`,
+                        severity: nearestArea?.severity || Math.floor(Math.random() * 60 + 20),
+                        level: nearestArea?.level || 'Medium Alert',
+                        color: nearestArea?.color || 'yellow',
                         population: 'N/A',
-                        lastUpdated: '4:15 PM',
+                        lastUpdated: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}),
                         coordinates: [latitude, longitude]
                     };
 
-                    // Find nearby posts (mock - in real app would use geospatial query)
-                    const nearbyPosts = mockPosts.slice(0, 3);
+                    // Find posts near current location (mock logic)
+                    const nearbyPosts = mockPosts.filter((post, index) => index < 4);
 
                     setLocationResults({
                         ...mockCurrentLocationData,
                         relatedPosts: nearbyPosts
                     });
+                    
+                } catch (error) {
+                    console.error('Current location error:', error);
+                    alert('Error getting current location data. Please try again.');
+                } finally {
                     setIsSearching(false);
-                },
-                (error) => {
-                    setIsSearching(false);
-                    alert('Unable to get your location. Please check location permissions.');
                 }
-            );
-        } else {
-            alert('Geolocation is not supported by this browser.');
-        }
+            },
+            (error) => {
+                setIsSearching(false);
+                let errorMessage = 'Unable to get your location. ';
+                
+                switch(error.code) {
+                    case error.PERMISSION_DENIED:
+                        errorMessage += 'Please allow location access and try again.';
+                        break;
+                    case error.POSITION_UNAVAILABLE:
+                        errorMessage += 'Location information is unavailable.';
+                        break;
+                    case error.TIMEOUT:
+                        errorMessage += 'Location request timed out.';
+                        break;
+                    default:
+                        errorMessage += 'An unknown error occurred.';
+                }
+                
+                alert(errorMessage);
+            },
+            {
+                enableHighAccuracy: true,
+                timeout: 10000,
+                maximumAge: 300000 // 5 minutes
+            }
+        );
     };
 
     const clearLocationResults = () => {
@@ -696,8 +798,6 @@ const Dashboard = () => {
                     )}
                 </div>
 
-                
-
                 {/* Emergency Guidelines */}
                 <div className="card p-4">
                     <h3 className="font-semibold text-gray-900 mb-3">Emergency Guidelines</h3>
@@ -742,8 +842,6 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-
-               
             </div>
         </div>
     );
